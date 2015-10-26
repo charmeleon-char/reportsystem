@@ -1,0 +1,78 @@
+﻿@model MvcApplication2.Checkinout
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Checkinout</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Logid)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Logid)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Userid)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Userid)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CheckTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CheckTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CheckType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CheckType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Sensorid)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Sensorid)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Checked)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Checked)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WorkType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WorkType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AttFlag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AttFlag)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OpenDoorFlag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OpenDoorFlag)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

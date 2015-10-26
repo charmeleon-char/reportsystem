@@ -1,0 +1,103 @@
+﻿.@model IEnumerable<MvcApplication2.Controllers.UserInfoController.CharmanderLaMeraPija>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Reporte de Horas Trabajadas";
+  
+}
+
+
+<br/>
+
+<div>
+  
+    @Html.Grid(Model).Columns(columns =>
+        {        
+    columns.Add((model => model.Nombre)).Filterable(true).Titled("Nombre");          
+    columns.Add((model => model.FechaEntrada)).Filterable(true).Sortable(true).Titled("Fecha y Hora de Entrada"); ;
+    columns.Add((model => model.FechaSalida)).Filterable(true).Sortable(true).Titled("Fecha y Hora de Salida");
+    columns.Add((model => model.Horas)).Filterable(true).Sortable(true).Titled("Horas Trabajadas"); ;
+
+}).WithPaging(10)
+   
+ 
+    
+
+</div>
+
+<h2>Search</h2>
+<br />
+    <form action="~/UserInfo/Index" method="post">
+   <ul>
+
+       <li>
+           <span>Departamento</span><select required id="selectdept" onchange="myfunction()">
+
+               <option value="1">Laureate Education</option>
+               <option value="2">IT</option>
+               <option value="3">Development</option>
+               <option value="4">Technical Customer Service</option>
+               <option value="7">Main Office</option>
+               <option value="8">BEC</option>
+               <option value="9">Course Management</option>
+               <option value="14">QA</option>
+               <option value="15">UX</option>
+               <option value="18">Events</option>
+               <option value="19">Faculty Development</option>
+               <option value="21">Discover</option>
+               <option value="22">LEP</option>
+               <option value="23">Faculty Development</option>
+               <option value="24">Customer Relations</option>
+               <option value="25">International Office</option>
+               <option value="26">Course Development</option>
+               <option value="27">Live</option>
+               <option value="28">Communities of Practice</option>
+               <option value="29">	International Class</option>
+           </select>
+       </li>
+       <br />
+       <li>
+           <span>Date</span>
+           <input type="text" name="selectDate" id="selectDate">
+       </li>
+
+       <br />
+       <li>
+               <span>Range Date</span>
+                <input type="text" name="deptid" id="deptid" hidden="hidden" value="" />
+                <input type="text" name="daterange" id="daterange" />
+           </li>
+        <br />
+
+       </ul>
+        <input type="submit" class="btn btn-success btn-lg btn-blocky" id="show" value="Show" />
+        <div>
+            Export Data :@Html.ActionLink("Export To Pdf", "Pdf", "UserInfo")
+        </div>
+   </form>
+        
+
+<script>
+   // $("#grid-cool").bootgrid();
+    $(document).ready(function () {
+        $('input[name="daterange"]').daterangepicker({ dateFormat: "yy/mm/dd" }).daterangepicker("setDate", new Date());
+    });
+    $(function () {
+        $('input[name="selectDate"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true
+        });
+    });
+
+    function myfunction() {
+        var value = document.getElementById("selectdept").value;
+        document.getElementById('deptid').value = value;
+    }
+    console.log(document.getElementById('deptid').value = document.getElementById("selectdept").value);
+
+
+ 
+</script>
+<script>
+   
+</script>

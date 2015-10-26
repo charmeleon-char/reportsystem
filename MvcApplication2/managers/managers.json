@@ -1,0 +1,197 @@
+﻿{
+    "managers": {
+        "IT": {
+            "Nombre_Dept": "IT",
+            "Name": [ "Raul Rivera" ],
+            "correo": [ "raul.rivera@laureate.net" ],
+            "Id_Dept": "2",
+            "GetReport": [
+                { "subdept": "IT- Support Services", "deptID": "30","subEmail": "ian.martinez@laureate.net","subName": "Ian Martinez" },
+                { "subdept": "LMSS-SCC", "deptID": "31","subEmail": "francisco.perez@laureate.net ","subName": "Francisco Perez" },
+                { "subdept": "Architecture", "deptID": "32","subEmail": "rodolfo.vesely@laureate.net","subName": "Rodolfo Vesely" }
+            ]
+        },
+        "DEV": {
+            "Nombre_Dept": "Software Solution DEV",
+            "Name": [ "Fedor Vasquez" ],
+            "correo": [ "Fedor.Vasquez@laureate.net" ],
+            "Id_Dept": "3",
+            "GetReport": [
+                { "subdept": "DEV", "deptID": "38" ,"subEmail": "oscar.espirilla@laureate.net","subName": "Oscar Espirilla" },
+                { "subdept": "QA DEV", "deptID": "40","subEmail": "belinda.torres@laureate.net","subName": "Belinda Torres"  },
+                { "subdept": "UX DEV", "deptID": "41","subEmail": "wilson.sanchez@laureate.net","subName": "Wilson Sanchez" },
+                { "subdept": "Project Manager", "deptID": "49","subEmail": "wilson.sanchez@laureate.net","subName": "Wilson Sanchez" }
+            ]
+        },
+        "CS": {
+            "Nombre_Dept": "Customer Service",
+            "Name": [ "Jennifer Chirinos", "Dariela Lopez", "Melisa Gomez" ],
+            "correo": [ "Jennifer.Chirinos@laureate.net", "dariela.lopez@laureate.net", "melissa.gomez@laureate.net" ],
+            "Id_Dept": "4",
+            "GetReport": [
+                { "subdept": "Customer Service", "deptID": "4" }
+            ]
+
+        },
+        "BEC": {
+            "Nombre_Dept": "BEC",
+            "Name": [ "Stefanny Calcott", "Beverly Watson" ],
+            "correo": [ "stephanie.calcott@laureate.net", " beverly.watson@laureate.net" ],
+            "Id_Dept": "8",
+            "GetReport": [
+                { "subdept": "Marketing Communication", "deptID": "47" ,"subEmail": "fernando.neda@laureate.net","subName": "Fernando Neda"},
+                { "subdept": "Creative Services", "deptID": "48" ,"subEmail": "fernando.neda@laureate.net","subName": "Fernando Neda" }
+            ]
+
+        },
+        "CM": {
+            "Nombre_Dept": "Course Management",
+            "Name": [ "Alexandra Artega", "Jennifer chifinos", "Melisa Gomez" ],
+            "correo": [ "alexandra.arteaga@laureate.net", "Jennifer.Chirinos@laureate.net", "melissa.gomez@laureate.net" ],
+            "Id_Dept": "9",
+            "GetReport": [
+                { "subdept": "Course Management", "deptID": "9" }
+
+            ]
+
+        },
+        "Faculty_Dev": {
+            "Nombre_Dept": "Faculty Dev",
+            "Name": ["Solangel"],
+            "correo": [ "solangel.corpeno@laureate.net" ],
+            "Id_Dept": "19",
+            "GetReport": [
+                { "subdept": "Faculty DeV", "deptID": "19" }
+
+            ]
+
+        },
+        "Discover": {
+            "Nombre_Dept": "Discover",
+            "Name": ["Nina Myers"],
+            "correo": [ "nina.myers@laureate.net" ],
+            "Id_Dept": "21",
+            "GetReport": [
+                { "subdept": "Discover", "deptID": "21" }
+
+            ]
+
+        },
+        "LEP": {
+            "Nombre_Dept": "LEP",
+            "Name":["Joseline Castanos"] ,
+            "correo": [ "joseline.castanos@laureate.net" ],
+            "Id_Dept": "22",
+            "GetReport": [
+                { "subdept": "LEP", "deptID": "22" }
+
+            ]
+
+        },
+        "SignatProducts": {
+            "Nombre_Dept": "Signature Products",
+            "Name": ["Sally Cheney"],
+            "correo": [ "sally.cheney@laureate.net" ],
+            "Id_Dept": "23",
+            "GetReport": [
+                { "subdept": "Signature Products", "deptID": "23" }
+
+            ]
+
+        },
+        "Customer_Relations": {
+            "Nombre_Dept": "Customer Relations",
+            "Name": ["Beverly Watson"],
+            "correo": ["beverly.watson@laureate.net"],
+            "Id_Dept": "24",
+            "GetReport": [
+                { "subdept": "Customer Relations", "deptID": "24" }
+
+            ]
+
+        },
+        "Customer_Relations": {
+            "Nombre_Dept": "International Office",
+            "Name": ["Argine Wieland"],
+            "correo": [ "argine.wieland@laureate.net" ],
+            "Id_Dept": "25",
+            "GetReport": [
+                { "subdept": "International Office", "deptID": "25" }
+
+            ]
+
+        },
+        "Multilingual_PD": {
+            "Nombre_Dept": "International Office",
+            "Name": ["Terry Gielleland"],
+            "correo": "Terry.Gilleland@laureate.net",
+            "Id_Dept": "26",
+            "GetReport": [
+                { "subdept": "MDP", "deptID": "44" ,"subEmail": "gloria.molina@laureate.net","subName": "Gloria Molina" },
+                { "subdept": "QA PD", "deptID": "45" ,"subEmail": "melissa.prudot@laureate.net","subName": "Melissa Prudot"},
+                { "subdept": "Online Design", "deptID": "46" ,"subEmail": "jairo.velasquez@laureate.net","subName": "Jairo Velasquez" }
+
+            ]
+
+        },
+        "BI": {
+            "Nombre_Dept": "BI",
+            "Name": ["Tulio Lagos"],
+            "correo": [ "tulio.lagos@laureate.net" ],
+            "Id_Dept": "33",
+            "GetReport": [
+                { "subdept": "BI", "deptID": "33" }
+
+            ]
+
+        },
+        "HR": {
+            "Nombre_Dept": "HR",
+            "Name":["Flor Reyes"] ,
+            "correo": [ "flor.reyes@laureate.net" ],
+            "Id_Dept": "34",
+            "GetReport": [
+                { "subdept": "HR", "deptID": "34" }
+
+            ]
+
+        },
+        "Finance": {
+            "Nombre_Dept": "Finance",
+            "Name": ["Oscar Castro"],
+            "correo": [ "oscar.castro@laureate.net" ],
+            "Id_Dept": "35",
+            "GetReport": [
+                { "subdept": "Finance", "deptID": "35" }
+
+            ]
+
+        },
+        "Academic_Opertation": {
+            "Nombre_Dept": "Academic Opertation",
+            "Name": ["Melisa Gomez"],
+            "correo": [ "melissa.gomez@laureate.net" ],
+            "Id_Dept": "37",
+            "GetReport": [
+                { "subdept": "Academic", "deptID": "37" }
+
+            ]
+
+        },
+        "Product_Managemente": {
+            "Nombre_Dept": "Product Managemente",
+            "Name": ["Diego Garcia"],
+            "correo": [ "diego.garcia@laureate.net" ],
+            "Id_Dept": "49",
+            "GetReport": [
+                { "subdept": "Eventst", "deptID": "50" ,"subEmail": "miguel.sanchez@laureate.net","subName": "Miguel Sanchez"  },
+                { "subdept": "LIVE", "deptID": "52","subEmail": "maximiliano.zampatti@laureate.net","subName": "Maximiliano"  },
+                { "subdept": "COP", "deptID": "53" ,"subEmail": "Priscilla.DOliveira@laureate.net","subName": "Priscila" }
+
+            ]
+
+        }
+
+
+    }
+ }

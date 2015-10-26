@@ -1,0 +1,69 @@
+﻿@model List<MvcApplication2.Controllers.CustomSaveController.test>
+
+@{
+    ViewBag.Title = "Index";
+    WebGrid grid = new WebGrid(Model);
+    string[] semana = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" };
+    var x = 0;
+
+}
+<style type="text/css">
+    table.gridtable {
+        font-family:Verdana,Arial,sans-serif;
+        font-size:11px;
+        color:#188fcb;
+        border-width:4px;
+        border-color:#bed4cf;
+        border-collapse:collapse;
+
+    }
+    .name {
+    
+      width: 950px;
+    }
+    .salida {
+             width: 950px;
+    }
+</style>
+<h2>Index</h2>
+<div>
+
+    @grid.GetHtml(
+    tableStyle:"gridTable",
+    columns:grid.Columns(
+    grid.Column("Nombre","Nombre",style:"name"),
+                         grid.Column("FechaEntradaMonday", "Fecha de Entrada LUNES"),
+                         grid.Column("FechaSalidaMonday","Fecha de Salida",style:"salida"),
+                            grid.Column("HorasMonday", "Horas Trabajadas Lunes"),
+                         grid.Column("FechaEntradaTuesday", "Fecha de Entrada MARTES"),
+            grid.Column("FechaSalidaTuesday","Fecha de Salida"),
+                          grid.Column("HorasTuesday", "Horas Trabajadas Martes"),
+                         grid.Column("FechaEntradaWendnsday", "Fecha de Entrada MIERCOLES"),
+            grid.Column("FechaSalidaWendnsday","Fecha de Salida"),
+                          grid.Column("HorasWendnsday", "Horas Trabajadas Miertcoles"),
+                         grid.Column("FechaEntradaThursday", "Fecha de JUEVES"),
+            grid.Column("FechaSalidaThursday","Fecha de Salida"),
+                        grid.Column("HorasThursday", "Horas Trabajadas Jueves"),                    
+                        grid.Column("FechaEntradaFriday", "Fecha de Entrada VIERNES"),
+            grid.Column("FechaSalidaFriday","Fecha de Salida"),
+                        grid.Column("HorasFriday", "Horas Trabajadas Viernes"),                                       
+                         grid.Column("FechaEntradaSaturday", "Fecha de Sabado"),
+            grid.Column("FechaSalidaSaturday","Fecha de Salida"),
+                         grid.Column("HorasSaturday", "Horas Trabajadas Sabado"),
+                         grid.Column("FechaEntradaSunday", "Fecha de DOMINGO"),
+            grid.Column("FechaSalidaSunday","Fecha de Salida")
+           
+
+        )
+    )
+  
+</div>
+<span>////////////////////////////////////////////////////////////////////////////////////////////////</span>
+<div>
+  
+ </div>
+<div>
+    Export Data :@Html.ActionLink("Export To Pdf", "GETpdf", "CustomSave")
+    Export Data :@Html.ActionLink("GETTABLE", "GETTABLE", "CustomSave")
+    Export Data :@Html.ActionLink("PDF", "PDF", "CustomSave")
+</div>
