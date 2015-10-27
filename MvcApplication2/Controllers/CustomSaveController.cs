@@ -16,7 +16,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Web.Script.Serialization;
-
+using MongoDB.Driver;
+using MongoDB.Bson;
+using MvcApplication2.Models;
 
 namespace MvcApplication2.Controllers
 {
@@ -24,8 +26,7 @@ namespace MvcApplication2.Controllers
     {
         private ReportSupEntities1 db = new ReportSupEntities1();
 
-        //
-        // GET: /CustomSave/
+
 
         public ActionResult Index()
         {
@@ -100,7 +101,7 @@ namespace MvcApplication2.Controllers
         }
         public FileStreamResult GETPdf()
         {
-           
+
 
             List<test> all = new List<test>();
             //  item1 = Session["selecdate"].ToString();
@@ -236,38 +237,39 @@ namespace MvcApplication2.Controllers
 
         public void PDF()
         {
+            core();
             List<test> all = new List<test>();
             List<WorkingPerDay> WorkingHoursPerDay = new List<WorkingPerDay>();
             Array recordweek = new Array[6];
             DateTime day = DateTime.Today;
             int offset = day.DayOfWeek - DayOfWeek.Monday;
-            DateTime lastmonday = Convert.ToDateTime(day.AddDays(-offset-7));
+            DateTime lastmonday = Convert.ToDateTime(day.AddDays(-offset - 7));
             string monday = lastmonday.ToString("dd-MM-yyyy");
-          //  DateTime newdate = DateTime.Parse(monday);
+            //  DateTime newdate = DateTime.Parse(monday);
 
             Document document = new Document(PageSize.A1, 5, 5, 15, 15);
-            PdfWriter.GetInstance(document, new FileStream(HttpContext.Server.MapPath("~/Pdf/Report_Architecture" + monday + ".pdf"), FileMode.Create));
+            PdfWriter.GetInstance(document, new FileStream(HttpContext.Server.MapPath("~/Pdf/Report_Architecture1" + monday + ".pdf"), FileMode.Create));
             document.Open();
             PdfPTable table = new PdfPTable(24);
             table.TotalWidth = 5000f;
-            float[] widths = new float[] { 1300f,1300, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f,1300f, 1300f,1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f,1300f };
+            float[] widths = new float[] { 1300f, 1300, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f, 1300f };
             table.SetWidths(widths);
             PdfPCell cell = new PdfPCell();
             PdfPCell cellName = new PdfPCell();
-            Array[] list ={};
+            Array[] list = { };
             iTextSharp.text.Font georgia = FontFactory.GetFont("georgia", 14f);
             georgia.Color = iTextSharp.text.BaseColor.BLUE;
-           string begindate = "09-14-2015";
+            string begindate = "09-14-2015";
             //  DateTime date =Convert.ToDateTime(Convert.ToDateTime("09-21-2015")).ToShortDateString();
-                using (ReportSupEntities1 dc = new ReportSupEntities1())
-                {
-                    //   all = (from e in dc).ToList();
+            using (ReportSupEntities1 dc = new ReportSupEntities1())
+            {
+                //   all = (from e in dc).ToList();
 
-                    all = (from e in dc.sp_matrix_weekdays(31, begindate) select new test { Nombre = e.name, FechaEntradaMonday = e.Hora_de_LLegada_Lunes, FechaSalidaMonday = e.Hora_de_salida_Lunes, HorasMonday = e.Monday, FechaEntradaTuesday = e.Hora_de_LLegada_Martes, FechaSalidaTuesday = e.Hora_de_salida_Martes, HorasTuesday = e.Tuesday, FechaEntradaWendnsday = e.Hora_de_LLegada_Miercoles, FechaSalidaWendnsday = e.Hora_de_salida_Miercoles, HorasWendnsday = e.Wednsday, FechaEntradaThursday = e.Hora_de_LLegada_Jueves, FechaSalidaThursday = e.Hora_de_salida_Jueves, HorasThursday = e.Thursday, FechaEntradaFriday = e.Hora_de_LLegada_Viernes, FechaSalidaFriday = e.Hora_de_salida_Viernes, HorasFriday = e.Friday, FechaEntradaSaturday = e.Hora_de_LLegada_Sabado, FechaSalidaSaturday = e.Hora_de_salida_Sabado, HorasSaturday = e.Saturday, FechaEntradaSunday = e.Hora_de_LLegada_Domingo, FechaSalidaSunday = e.Hora_de_salida_Domingo, HorasSunday = e.Sunday }).ToList();
+                all = (from e in dc.sp_matrix_weekdays(31, begindate) select new test { Nombre = e.name, FechaEntradaMonday = e.Hora_de_LLegada_Lunes, FechaSalidaMonday = e.Hora_de_salida_Lunes, HorasMonday = e.Monday, FechaEntradaTuesday = e.Hora_de_LLegada_Martes, FechaSalidaTuesday = e.Hora_de_salida_Martes, HorasTuesday = e.Tuesday, FechaEntradaWendnsday = e.Hora_de_LLegada_Miercoles, FechaSalidaWendnsday = e.Hora_de_salida_Miercoles, HorasWendnsday = e.Wednsday, FechaEntradaThursday = e.Hora_de_LLegada_Jueves, FechaSalidaThursday = e.Hora_de_salida_Jueves, HorasThursday = e.Thursday, FechaEntradaFriday = e.Hora_de_LLegada_Viernes, FechaSalidaFriday = e.Hora_de_salida_Viernes, HorasFriday = e.Friday, FechaEntradaSaturday = e.Hora_de_LLegada_Sabado, FechaSalidaSaturday = e.Hora_de_salida_Sabado, HorasSaturday = e.Saturday, FechaEntradaSunday = e.Hora_de_LLegada_Domingo, FechaSalidaSunday = e.Hora_de_salida_Domingo, HorasSunday = e.Sunday }).ToList();
                 //    WorkingHoursPerDay = (from i in dc.sp_GetWorkingHoursPerDay(1, Convert.ToDateTime("08-13-2015").AddDays(w)) select new WorkingPerDay { Name = i.Name, HourInput = i.horaEntrada, HourOutput = i.horasalida, workingHours = Convert.ToInt32(i.horaTrabajada) }).ToList();
-               //     list[w] = WorkingHoursPerDay.ToList().ToArray();
-                }
-                DateTime date = Convert.ToDateTime(begindate);
+                //     list[w] = WorkingHoursPerDay.ToList().ToArray();
+            }
+            DateTime date = Convert.ToDateTime(begindate);
 
             //PdfPCell june = new PdfPCell(new Phrase("Cell 2",georgia));
 
@@ -275,213 +277,216 @@ namespace MvcApplication2.Controllers
 
 
 
-                    PdfPCell nombre = new PdfPCell(new Phrase("Name"));
-                    nombre.Rowspan = 2;
-                    nombre.Colspan = 2;
-                    nombre.HorizontalAlignment = 1;
-                    nombre.VerticalAlignment = 0;
-                    table.AddCell(nombre);
+            PdfPCell nombre = new PdfPCell(new Phrase("Name"));
+            nombre.Rowspan = 2;
+            nombre.Colspan = 2;
+            nombre.HorizontalAlignment = 1;
+            nombre.VerticalAlignment = 0;
+            table.AddCell(nombre);
 
-                    PdfPCell june = new PdfPCell(new Phrase("Moday :" + Convert.ToDateTime(date).ToShortDateString().ToString(), georgia));
-                    june.HorizontalAlignment = 1;
-                    june.Colspan = 3;
-                    table.AddCell(june);
-                    june = new PdfPCell(new Phrase("Tuesday :" + Convert.ToDateTime(date).AddDays(1).ToShortDateString(), georgia));
-          
-                    june.HorizontalAlignment = 1;
-                    june.Colspan = 3;
-                    table.AddCell(june);
-                    june = new PdfPCell(new Phrase("Wednsday :" + Convert.ToDateTime(date).AddDays(2).ToShortDateString(), georgia));
+            PdfPCell june = new PdfPCell(new Phrase("Moday :" + Convert.ToDateTime(date).ToShortDateString().ToString(), georgia));
+            june.HorizontalAlignment = 1;
+            june.Colspan = 3;
+            table.AddCell(june);
+            june = new PdfPCell(new Phrase("Tuesday :" + Convert.ToDateTime(date).AddDays(1).ToShortDateString(), georgia));
 
-                    june.HorizontalAlignment = 1;
-                    june.Colspan = 3;
-                    table.AddCell(june);
-                    june = new PdfPCell(new Phrase("Thursday :" + Convert.ToDateTime(date).AddDays(3).ToShortDateString(), georgia));
+            june.HorizontalAlignment = 1;
+            june.Colspan = 3;
+            table.AddCell(june);
+            june = new PdfPCell(new Phrase("Wednsday :" + Convert.ToDateTime(date).AddDays(2).ToShortDateString(), georgia));
 
-                    june.HorizontalAlignment = 1;
-                    june.Colspan = 3;
-                    table.AddCell(june);
+            june.HorizontalAlignment = 1;
+            june.Colspan = 3;
+            table.AddCell(june);
+            june = new PdfPCell(new Phrase("Thursday :" + Convert.ToDateTime(date).AddDays(3).ToShortDateString(), georgia));
 
-                    june = new PdfPCell(new Phrase("Friday :" + Convert.ToDateTime(date).AddDays(4).ToShortDateString(), georgia));
+            june.HorizontalAlignment = 1;
+            june.Colspan = 3;
+            table.AddCell(june);
 
-                    june.HorizontalAlignment = 1;
-                    june.Colspan = 3;
-                    table.AddCell(june);
+            june = new PdfPCell(new Phrase("Friday :" + Convert.ToDateTime(date).AddDays(4).ToShortDateString(), georgia));
 
-
-                    june = new PdfPCell(new Phrase("Saturday :" + Convert.ToDateTime(date).AddDays(5).ToShortDateString(), georgia));
-
-                    june.HorizontalAlignment = 1;
-                    june.Colspan = 3;
-                    table.AddCell(june);
-                    june = new PdfPCell(new Phrase("Sunday :" + Convert.ToDateTime(date).AddDays(6).ToShortDateString(), georgia));
-
-                    june.HorizontalAlignment = 1;
-                    june.Colspan = 3;
-                    table.AddCell(june);
-
-                    june = new PdfPCell(new Phrase("             "));
-
-                    june.HorizontalAlignment = 1;
-                    june.Colspan = 3;
-                    table.AddCell(june);
+            june.HorizontalAlignment = 1;
+            june.Colspan = 3;
+            table.AddCell(june);
 
 
-                   
-                 
-                        PdfPCell second = new PdfPCell();
-                        for (var i = 0; i <= 6; i++)
-                        {
-                            second = new PdfPCell(new Phrase("In"));
-                            second.HorizontalAlignment = 1;
-                            table.AddCell(second);
+            june = new PdfPCell(new Phrase("Saturday :" + Convert.ToDateTime(date).AddDays(5).ToShortDateString(), georgia));
 
-                            second = new PdfPCell(new Phrase("Out"));
-                            second.HorizontalAlignment = 1;
-                            table.AddCell(second);
+            june.HorizontalAlignment = 1;
+            june.Colspan = 3;
+            table.AddCell(june);
+            june = new PdfPCell(new Phrase("Sunday :" + Convert.ToDateTime(date).AddDays(6).ToShortDateString(), georgia));
 
-                            second = new PdfPCell(new Phrase("Worked Hours"));
-                            second.HorizontalAlignment = 1;
-                            table.AddCell(second);
+            june.HorizontalAlignment = 1;
+            june.Colspan = 3;
+            table.AddCell(june);
 
-                 
-                        }
-                        second = new PdfPCell(new Phrase("Weekly Hours Worked"));
-                        second.HorizontalAlignment = 1;
-                        table.AddCell(second);
-     
+            june = new PdfPCell(new Phrase("             "));
+
+            june.HorizontalAlignment = 1;
+            june.Colspan = 3;
+            table.AddCell(june);
 
 
 
-                    
-                    foreach (var item in all)
-                    {
 
-                    cellName.Phrase = new Phrase(item.Nombre);
-                    cellName.HorizontalAlignment = 1;
-                    cellName.Colspan = 2;
-                    table.AddCell(cellName);
+            PdfPCell second = new PdfPCell();
+            for (var i = 0; i <= 6; i++)
+            {
+                second = new PdfPCell(new Phrase("In"));
+                second.HorizontalAlignment = 1;
+                table.AddCell(second);
 
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaMonday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
+                second = new PdfPCell(new Phrase("Out"));
+                second.HorizontalAlignment = 1;
+                table.AddCell(second);
 
-
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaMonday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
-
-                    cell.Phrase = new Phrase((item.HorasMonday).ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
-
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaTuesday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
+                second = new PdfPCell(new Phrase("Worked Hours"));
+                second.HorizontalAlignment = 1;
+                table.AddCell(second);
 
 
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaTuesday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
-
-                    cell.Phrase = new Phrase((item.HorasTuesday).ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
-
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaWendnsday).ToShortTimeString().ToString());
-                   
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
+            }
+            second = new PdfPCell(new Phrase("Weekly Hours Worked"));
+            second.HorizontalAlignment = 1;
+            table.AddCell(second);
 
 
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaWendnsday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
-
-                    cell.Phrase = new Phrase((item.HorasWendnsday).ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
 
 
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaThursday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
+
+            foreach (var item in all)
+            {
+
+                cellName.Phrase = new Phrase(item.Nombre);
+                cellName.HorizontalAlignment = 1;
+                cellName.Colspan = 2;
+                table.AddCell(cellName);
+
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaMonday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
 
 
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaThursday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaMonday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
 
-                    cell.Phrase = new Phrase((item.HorasThursday).ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
+                cell.Phrase = new Phrase((item.HorasMonday).ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
 
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaFriday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
-
-
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaFriday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
-
-                    cell.Phrase = new Phrase((item.HorasFriday).ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
-
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaSaturday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaTuesday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
 
 
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaSaturday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaTuesday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
 
-                    cell.Phrase = new Phrase((item.HorasSaturday).ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
+                cell.Phrase = new Phrase((item.HorasTuesday).ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
 
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaSunday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaWendnsday).ToShortTimeString().ToString());
+
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
 
 
-                    cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaSunday).ToShortTimeString().ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaWendnsday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
 
-                    cell.Phrase = new Phrase((item.HorasSunday).ToString());
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
-                   // DateTime d1 = DateTime.Parse(Convert.ToDateTime(item.HorasMonday).ToString());
-                    //DateTime d2 = DateTime.Parse(Convert.ToDateTime(item.HorasMonday).ToString());
-                 //   double span = (d1 - d2).TotalHours;
-                    cell.Phrase = new Phrase(Convert.ToString(Convert.ToDecimal(item.HorasMonday) + Convert.ToDecimal(item.HorasTuesday) + Convert.ToDecimal(item.HorasWendnsday) + Convert.ToDecimal(item.HorasThursday) + Convert.ToDecimal(item.HorasFriday) + Convert.ToDecimal(item.HorasSaturday) + Convert.ToDecimal(item.HorasSunday)));
-                    cell.HorizontalAlignment = 1;
-                    table.AddCell(cell);
-                   
-                        //table.Rows.Add(cell);
-                    //                 
+                cell.Phrase = new Phrase((item.HorasWendnsday).ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
 
-                }
 
-         
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaThursday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaThursday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+                cell.Phrase = new Phrase((item.HorasThursday).ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaFriday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaFriday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+                cell.Phrase = new Phrase((item.HorasFriday).ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaSaturday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaSaturday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+                cell.Phrase = new Phrase((item.HorasSaturday).ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaEntradaSunday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+
+                cell.Phrase = new Phrase(Convert.ToDateTime(item.FechaSalidaSunday).ToShortTimeString().ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+                cell.Phrase = new Phrase((item.HorasSunday).ToString());
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+                // DateTime d1 = DateTime.Parse(Convert.ToDateTime(item.HorasMonday).ToString());
+                //DateTime d2 = DateTime.Parse(Convert.ToDateTime(item.HorasMonday).ToString());
+                //   double span = (d1 - d2).TotalHours;
+                cell.Phrase = new Phrase(Convert.ToString(Convert.ToDecimal(item.HorasMonday) + Convert.ToDecimal(item.HorasTuesday) + Convert.ToDecimal(item.HorasWendnsday) + Convert.ToDecimal(item.HorasThursday) + Convert.ToDecimal(item.HorasFriday) + Convert.ToDecimal(item.HorasSaturday) + Convert.ToDecimal(item.HorasSunday)));
+                cell.HorizontalAlignment = 1;
+                table.AddCell(cell);
+
+                //table.Rows.Add(cell);
+                //                 
+
+            }
+
+
 
 
 
 
             //            document.Add(table);
+
             document.Add(table);
             document.Close();
+            
             sendEmail(monday);
-             
+            
 
             //  var output = new MemoryStream();
 
         }
-        public void sendEmail(string monday) {
-            Thread.Sleep(400000);
+        public void sendEmail(string monday)
+        {
+            Thread.Sleep(1900000);
             string to = "reynaldo.narvaez@laureate.net"; //To address    
             string from = "ramon.calix@laureate.net"; //From address    
             MailMessage message = new MailMessage(from, to);
@@ -505,23 +510,58 @@ namespace MvcApplication2.Controllers
             catch (Exception ex)
             {
                 throw ex;
-            }  
+            }
         }
-      public class boos{
-        public string name {get;set ;}
-        public  string correo {get;set;}
-        public  string departamento {get;set;}
-        public string subdept { get; set; }
-        public string deptID { get; set; }
-      }
+        public class boos
+        {
+            public string name { get; set; }
+            public string correo { get; set; }
+            public string departamento { get; set; }
+            public string subdept { get; set; }
+            public string deptID { get; set; }
+        }
         public void core()
         {
-          
-            
+            var client = new MongoClient();
+            var db = client.GetDatabase("admin");
+            var collection = db.GetCollection<infoDept>("managers");
 
+       
+
+            var test = from d in collection.AsQueryable<infoDept>()
+                       select d.Id_Dept;
+           foreach(var items in test)
+            {
+                    var managers = collection
+                          .Find(a => a.Id_Dept == items)
+                          .ToListAsync()
+                          .Result;
+                    foreach (var i in managers)
+                    {
+                        Console.WriteLine(i.Name + " " + i.correo +"  "+i.Nombre_Dept);
+                    }
+            }
+
+       
+      }
+       
+        public class infoDept
+        {
+            public ObjectId Id { get; set; }
+            public string Nombre_Dept { get; set; }
+            public string[] Name { get; set; }
+            public string[] correo { get; set; }
+            public string Id_Dept { get; set; }
+            public Getreport[] GetReport { get; set; }
         }
-        
-    
+
+        public class Getreport
+        {
+            public string subdept { get; set; }
+            public string deptID { get; set; }
+            public string subEmail { get; set; }
+            public string subName { get; set; }
+        }
     }
 
 }

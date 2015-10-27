@@ -101,7 +101,6 @@ C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\Spring.Re
 C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\Spring.Social.Core.pdb
 C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\Spring.Social.Core.xml
 C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\EntityFramework.xml
-C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\Newtonsoft.Json.xml
 C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\System.Web.Helpers.xml
 C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\System.Web.Mvc.xml
 C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\System.Web.Razor.xml
@@ -135,3 +134,8 @@ C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\MvcRazorT
 C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\obj\Release\MvcApplication2.csprojResolveAssemblyReference.cache
 C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\obj\Release\RdlCompile.cache
 C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\obj\Release\RdlCompile.compiled
+C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\MongoDB.Bson.dll
+C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\MongoDB.Driver.Core.dll
+C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\MongoDB.Driver.dll
+C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\MongoDB.Bson.xml
+C:\Users\rcalix\Dropbox (laureate)\MvcApplication2\MvcApplication2\bin\MongoDB.Driver.xml
